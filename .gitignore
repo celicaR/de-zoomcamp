@@ -2,3 +2,21 @@ ny_taxi_postgres_data
 */data
 *.parquet
 *.json
+
+# Local .terraform directories
+*/*/.terraform/*
+
+# Ignore variables files
+*/*.auto.tfvars
+
+# Ignore override files
+*/*.tfoverride
+
+# Ignore environment-specific files
+.envrc
+
+# Ignore CLI configuration files
+**.terraform
+.**.terraform/
+**.terraform.lock.hcl
+**terraform.tfstate*
