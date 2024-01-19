@@ -1,4 +1,5 @@
 import os
+import gzip
 import argparse
 import pandas as pd
 from sqlalchemy import create_engine
@@ -45,11 +46,37 @@ def main(params):
     table_name = params.table_name
     url = params.url
 
-    parquet_file = 'output.parquet'
-    os.system(f'wget {url} -O {parquet_file}')
+    file_name, file_extension = os.path.splitext(url)
+    print(file_extension)
+    output_file = None
+    if file_extension == '.gz':
+        output_file = 'output.csv.gz'
 
-    df = pd.read_parquet(parquet_file)
-    print("Parquet file read.")
+        os.system(f'wget {url} -O {output_file}')
+
+        with gzip.open(output_file) as file_in:
+            df = pd.read_csv(file_in)
+        print(df.dtypes)
+        df['lpep_pickup_datetime'] = pd.to_datetime(df['lpep_pickup_datetime'])
+        df['lpep_dropoff_datetime'] = pd.to_datetime(df['lpep_dropoff_datetime'])
+        print(df.dtypes)
+        print("CSV.GZ file read.")
+    elif file_extension == '.csv':
+        output_file = 'output.csv'
+
+        os.system(f'wget {url} -O {output_file}')
+        df = pd.read_csv(output_file)
+        print(df.head())
+
+        print("CSV file read.")
+    elif file_extension == '.parquet':
+        output_file = 'output.parquet'
+        os.system(f'wget {url} -O {output_file}')
+        df = pd.read_parquet(output_file)
+        print("Parquet file read.")
+    else:
+        print("Unknown file type.")
+        exit()
 
     # Create the SQLAlchemy engine
     engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
@@ -60,7 +87,7 @@ def main(params):
     #print(f"Creating {table_name} in the engine.")
     #df.to_sql(name=table_name, con=engine, if_exists='replace')
     #print(f"Table {table_name} created in the engine.")
-    os.system(f'rm {parquet_file}')
+    os.system(f'rm {output_file}')
 
 if __name__ == '__main__':
 
