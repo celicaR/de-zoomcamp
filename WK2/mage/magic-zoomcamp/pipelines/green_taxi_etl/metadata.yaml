@@ -1,0 +1,119 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - transform_taxi_data
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_taxi_data_from_url
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_taxi_data_from_url
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_taxi_data_to_postgres
+  - export_taxi_data_to_gcp_with_partitions
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: transform_taxi_data
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_taxi_data_from_url
+  uuid: transform_taxi_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - check_data
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_taxi_data_to_postgres
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_taxi_data
+  uuid: export_taxi_data_to_postgres
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration:
+    data_provider: postgres
+    data_provider_profile: dev
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: check_data
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - export_taxi_data_to_postgres
+  uuid: check_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: postgres
+    data_provider_profile: dev
+    export_write_policy: append
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_taxi_data_to_gcp_with_partitions
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_taxi_data
+  uuid: export_taxi_data_to_gcp_with_partitions
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-02-02 12:01:49.630638+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: green_taxi_etl
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+updated_at: '2024-02-03 08:54:25'
+uuid: green_taxi_etl
+variables_dir: /home/src/mage_data/magic-zoomcamp
+widgets: []
