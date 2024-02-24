@@ -18,7 +18,7 @@ TIMESTAMP value is out of allowed range: from 0001-01-01 00:00:00.000000+00 to 9
 
 #### Resulting GCS
 
-![Alt text](./images/gcs.jpg "gcs")
+![Alt text](./images/gcs.png "gcs")
 
 </details>
 
@@ -50,7 +50,7 @@ OPTIONS (
 
 #### Resulting BQ
 
-![Alt text](./images/bq_tables.jpg "bq_tables")
+![Alt text](./images/bq_tables.png "bq_tables")
 </details>
 
 <details>
@@ -72,8 +72,8 @@ Trying to generate models - no luck
 
   #### Compile and Build results
 
-![Alt text](./images/dbt_compile.jpg "dbt_compile")
-![Alt text](./images/dbt_build.jpg "dbt_build")
+![Alt text](./images/dbt_compile.png "dbt_compile")
+![Alt text](./images/dbt_build.png "dbt_build")
 
 </details>
 
@@ -82,8 +82,8 @@ Trying to generate models - no luck
 
   #### Staging and Lineage results
 
-![Alt text](./images/staging_tripdata.jpg "staging_tripdata")
-![Alt text](./images/lineage.jpg "lineage")
+![Alt text](./images/staging_tripdata.png "staging_tripdata")
+![Alt text](./images/lineage.png "lineage")
 
 </details>
 
@@ -92,7 +92,7 @@ Trying to generate models - no luck
 
   #### DBT BQ Results
 
-![Alt text](./images/big_query.jpg "big_query")
+![Alt text](./images/big_query.png "big_query")
 
 </details>
 ===
