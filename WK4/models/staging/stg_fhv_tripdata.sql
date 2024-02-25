@@ -19,8 +19,8 @@ select
     {{ dbt.safe_cast("DOlocationID", api.Column.translate_type("integer")) }} as dropoff_locationid,
     
     -- timestamps
-    IFNULL(SAFE.TIMESTAMP_MILLIS(pickup_datetime),TIMESTAMP_SECONDS(CAST(CAST(pickup_datetime as INT64)/1000000 AS INT64))) as pickup_datetime,
-    IFNULL(SAFE.TIMESTAMP_MILLIS(dropOff_datetime),TIMESTAMP_SECONDS(CAST(CAST(dropOff_datetime as INT64)/1000000 AS INT64))) as dropOff_datetime,
+    IFNULL(SAFE.TIMESTAMP_MILLIS(pickup_datetime),TIMESTAMP_MILLIS(CAST(CAST(pickup_datetime as INT64)/1000000 AS INT64))) as pickup_datetime,
+    IFNULL(SAFE.TIMESTAMP_MILLIS(dropOff_datetime),TIMESTAMP_MILLIS(CAST(CAST(dropOff_datetime as INT64)/1000000 AS INT64))) as dropOff_datetime,
 
     -- Other trip info
     {{ dbt.safe_cast("SR_Flag", api.Column.translate_type("integer")) }} as sr_flag,

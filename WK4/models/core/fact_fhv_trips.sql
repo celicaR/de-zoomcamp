@@ -9,8 +9,8 @@ with fhv_tripdata as (
         *,
         'FHV' as service_type
     from {{ ref('stg_fhv_tripdata') }}
-    where date(pickup_datetime) > date('2018-12-31')
-    and date(pickup_datetime) < date('2020-01-01')
+    where date(pickup_datetime) between '2018-12-31' and '2020-01-01'
+    and date(dropoff_datetime) between '2018-12-31' and '2020-01-01'
 ),
 dim_zones as (
     select * from {{ ref('dim_zones') }}
