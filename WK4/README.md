@@ -105,7 +105,7 @@ Trying to generate models - no luck
 - Continue trying to answer questions 3 & 4 today - 25/2/24, and I got it. However, I don't have access to a free tier of looker and/or access to data studio either!
 
 <details>
-  <summary>Final BQ Set up - Click me</summary>
+  <summary>Final Set up - Click me</summary>
 
   #### Final Set up 
 
